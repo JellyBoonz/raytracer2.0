@@ -61,7 +61,7 @@ To render different scenes, edit the `switch` statement in `src/main.cpp` (aroun
 - **Case 13**: `estimate_log_sin_halfway_point()` - Integration with sorting
 - **Case 14**: `integrate_cos_cubed()` - Cos cubed integration
 
-Uncomment other cases in the switch statement to enable additional scenes:
+Uncomment other cases in the switch statement to enable additional scenes. These are currently broken:
 - Case 1: Bouncing spheres
 - Case 2: Checkered spheres
 - Case 3: Earth texture
