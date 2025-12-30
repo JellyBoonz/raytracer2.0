@@ -22,4 +22,11 @@ CMakeFiles/
 !CMakeLists.txt
 
 # macOS specific
-.DS_Store 
+.DS_Store
+
+# Debug and log files
+.cursor/debug.log
+*.log
+
+# Output images (optional - you may want to keep these)
+*.ppm 
