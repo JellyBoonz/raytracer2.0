@@ -169,6 +169,45 @@ void bubble()
     cam.render(hittable_list(ball), lights);
 }
 
+void simple_scene()
+{
+    hittable_list world;
+
+    // Floor - large sphere acting as ground
+    auto floor_material = make_shared<lambertian>(color(0.5, 0.5, 0.5));
+    world.add(make_shared<sphere>(point3(0, -1000, 0), 1000, floor_material));
+
+    // Light source - emissive sphere
+    auto light_material = make_shared<diffuse_light>(color(15, 15, 13));
+    auto light_sphere = make_shared<sphere>(point3(-2, 4, 5), 1, light_material);
+    world.add(light_sphere);
+
+    // Diffuse sphere - will be illuminated by the light
+    auto diffuse_material = make_shared<lambertian>(color(0.8, 0.3, 0.3));
+    world.add(make_shared<sphere>(point3(0, 1.5, 0), 1.5, diffuse_material));
+
+    // Light list for importance sampling
+    hittable_list lights;
+    lights.add(light_sphere);
+
+    camera cam;
+
+    cam.ar = 16.0 / 9.0;
+    cam.width = 600;
+    cam.samples_per_pixel = 10;
+    cam.max_depth = 50;
+    cam.background = color(0, 0, 0);
+
+    cam.vfov = 45;
+    cam.lookfrom = point3(5, 3, 7);
+    cam.lookat = point3(0, 1, 0);
+    cam.vup = vec3(0, 1, 0);
+
+    cam.defocus_angle = 0;
+
+    cam.render(world, lights);
+}
+
 // void perlin_spheres()
 // {
 //     hittable_list world;
@@ -611,7 +650,7 @@ void integrate_cos_cubed()
 
 int main()
 {
-    switch (4)
+    switch (15)
     {
     // case 1:
     //     bouncing_spheres();
@@ -654,6 +693,9 @@ int main()
         break;
     case 14:
         integrate_cos_cubed();
+        break;
+    case 15:
+        simple_scene();
         break;
     }
 }
